@@ -35,3 +35,16 @@ class CustomerAdmin(admin.ModelAdmin):
     def display_name(self, obj):
         return str(obj)
 
+    @admin.action(description='Activar clientes seleccionados')
+    def activate_customers(self, request, queryset):
+        queryset.update(is_active=True)
+
+    @admin.action(description='Desactivar clientes seleccionados')
+    def deactivate_customers(self, request, queryset):
+        queryset.update(is_active=False)
+
+    actions = (
+        'activate_customers',
+        'deactivate_customers'
+    )
+
