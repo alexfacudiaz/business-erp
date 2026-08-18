@@ -1,14 +1,14 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import CustomerViewSet
+from .views import StockMovementViewSet
 
 
 router = DefaultRouter()
 
 router.register(
     r'',
-    CustomerViewSet,
-    basename='customer'
+    StockMovementViewSet,
+    basename='stock-movement'
 )
 
 urlpatterns = router.urls
