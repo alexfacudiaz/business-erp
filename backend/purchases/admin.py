@@ -109,7 +109,7 @@ class PurchaseAdmin(admin.ModelAdmin):
         
         cancelled = 0
 
-        for purchase in queryset:
+        for purchase in purchases:
             try:
                 cancel_purchase(purchase)
                 cancelled += 1
@@ -126,3 +126,45 @@ class PurchaseAdmin(admin.ModelAdmin):
                 f'{cancelled} compra(s) cancelada(s) correctamente.',
                 level=messages.SUCCESS,
             )
+
+
+@admin.register(PurchaseItem)
+class PurchaseItemAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'purchase',
+        'product',
+        'quantity',
+        'unit_cost',
+        'subtotal',
+        'created_at',
+    )
+
+    list_filter = (
+        'purchase__status',
+    )
+
+    search_fields = (
+        'purchase__reference',
+        'product__name',
+        'product__sku',
+    )
+
+    readonly_fields = (
+        'purchase',
+        'product',
+        'quantity',
+        'unit_cost',
+        'subtotal',
+        'created_at',
+        'updated_at',
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
