@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Product, StockMovement
+from .models import Product
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,33 +25,3 @@ class ProductSerializer(serializers.ModelSerializer):
             'updated_at',
         )
 
-
-class StockMovementSerializer(serializers.ModelSerializer):
-    product = serializers.PrimaryKeyRelatedField(
-        queryset=Product.objects.all()
-    )
-
-    class Meta:
-        model = StockMovement
-        fields = (
-            'id',
-            'product',
-            'movement_type',
-            'quantity',
-            'reason',
-            'created_at',
-            'updated_at',
-        )
-        read_only_fields = (
-            'id',
-            'created_at',
-            'updated_at',
-        )
-
-    def validate_quantity(self, value):
-        if value <= 0:
-            raise serializers.ValidationError(
-                'La cantidad debe ser mayor que 0.'
-            )
-
-        return value
