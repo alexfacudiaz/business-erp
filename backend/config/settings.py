@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Django REST
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
 
     # Local apps
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'suppliers',
     'purchases',
     'sales',
+    'stock_adjustments',
 ]
 
 MIDDLEWARE = [
@@ -154,6 +156,9 @@ AUTH_USER_MODEL = 'users.User'
 
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
