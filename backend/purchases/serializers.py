@@ -25,6 +25,22 @@ class PurchaseItemSerializer(serializers.ModelSerializer):
             'updated_at',
         )
 
+    def validate(self, attrs):
+        quantity = attrs.get('quantity')
+        unit_cost = attrs.get('unit_cost')
+
+        if quantity is not None and quantity <= 0:
+            raise serializers.ValidationError({
+                'quantity': 'La cantidad debe ser mayor que 0.'
+            })
+
+        if unit_cost is not None and unit_cost < 0:
+            raise serializers.ValidationError({
+                'unit_cost': 'El costo unitario no puede ser negativo.'
+            })
+
+        return attrs
+
 
 class PurchaseSerializer(serializers.ModelSerializer):
     items = PurchaseItemSerializer(
