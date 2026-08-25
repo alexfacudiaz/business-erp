@@ -66,6 +66,10 @@ class Customer(TimeStampedModel):
     )
 
     class Meta:
+        permissions = [
+            ('deactivate_customer', 'Can deactivate customer'),
+            ('activate_customer', 'Can activate customer'),
+        ]
         constraints = [
             models.CheckConstraint(
                 condition=(
