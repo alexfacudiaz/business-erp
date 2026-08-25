@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from .models import Customer
 from .serializers import CustomerSerializer
+from core.permissions import ERPModelPermissions
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
@@ -40,6 +41,10 @@ class CustomerViewSet(viewsets.ModelViewSet):
         'customer_type',
         'last_name',
         'business_name',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )
 
     def destroy(self, request, *args, **kwargs):

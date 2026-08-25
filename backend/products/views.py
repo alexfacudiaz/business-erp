@@ -7,6 +7,8 @@ from rest_framework.exceptions import ValidationError
 
 from .models import Product
 from .serializers import ProductSerializer
+from core.permissions import ERPModelPermissions
+
 
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
@@ -37,4 +39,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     ordering = (
         'name',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )

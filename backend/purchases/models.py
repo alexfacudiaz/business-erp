@@ -40,6 +40,11 @@ class Purchase(TimeStampedModel):
     class Meta:
         ordering = ('-created_at',)
 
+        permissions = [
+            ('confirm_purchase', 'Can confirm purchase'),
+            ('cancel_purchase', 'Can cancel purchase')
+        ]
+
     def __str__(self) -> str:
         return f'Compra #{self.pk} - {self.supplier}'
 

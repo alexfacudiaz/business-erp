@@ -9,6 +9,7 @@ from rest_framework.exceptions import ValidationError
 from .models import Sale, SaleItem
 from .serializers import SaleSerializer, SaleItemSerializer
 from .services import confirm_sale, cancel_sale
+from core.permissions import ERPModelPermissions
 
 # Create your views here.
 class SaleViewSet(viewsets.ModelViewSet):
@@ -43,6 +44,10 @@ class SaleViewSet(viewsets.ModelViewSet):
 
     ordering = (
         '-created_at',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )
 
     @action(
@@ -130,6 +135,10 @@ class SaleItemViewSet(viewsets.ModelViewSet):
 
     ordering = (
         '-created_at',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )
 
     def perform_create(self, serializer):

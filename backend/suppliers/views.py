@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from .models import Supplier
 from .serializers import SupplierSerializer
+from core.permissions import ERPModelPermissions
 
 
 # Create your views here.
@@ -42,6 +43,10 @@ class SupplierViewSet(viewsets.ModelViewSet):
         'supplier_type',
         'last_name',
         'business_name',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )
 
     def destroy(self, request, *args, **kwargs):

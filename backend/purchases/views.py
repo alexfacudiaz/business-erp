@@ -9,6 +9,7 @@ from rest_framework.exceptions import ValidationError
 from .models import Purchase, PurchaseItem
 from .serializers import PurchaseSerializer, PurchaseItemSerializer
 from .services import confirm_purchase, cancel_purchase
+from core.permissions import ERPModelPermissions
 
 # Create your views here.
 class PurchaseViewSet(viewsets.ModelViewSet):
@@ -43,6 +44,10 @@ class PurchaseViewSet(viewsets.ModelViewSet):
 
     ordering = (
         '-created_at',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )
 
     @action(
@@ -130,6 +135,10 @@ class PurchaseItemViewSet(viewsets.ModelViewSet):
 
     ordering = (
         '-created_at',
+    )
+
+    permission_classes = (
+        ERPModelPermissions,
     )
 
     def perform_create(self, serializer):

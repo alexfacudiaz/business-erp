@@ -5,11 +5,11 @@ from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
 
 from .models import StockAdjustment, StockAdjustmentItem
 from .serializers import StockAdjustmentSerializer, StockAdjustmentItemSerializer
 from .services import confirm_stock_adjustment
+from core.permissions import ERPModelPermissions
 
 
 # Create your views here.
@@ -51,7 +51,7 @@ class StockAdjustmentViewSet(viewsets.ModelViewSet):
     )
 
     permission_classes = (
-        IsAuthenticated,
+        ERPModelPermissions,
     )
 
     @action(
@@ -132,7 +132,7 @@ class StockAdjustmentItemViewSet(viewsets.ModelViewSet):
     )
 
     permission_classes = (
-        IsAuthenticated,
+        ERPModelPermissions,
     )
 
     def perform_create(self, serializer):
