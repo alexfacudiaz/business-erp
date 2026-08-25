@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 from .models import Supplier
 from .serializers import SupplierSerializer
@@ -49,10 +50,54 @@ class SupplierViewSet(viewsets.ModelViewSet):
         ERPModelPermissions,
     )
 
-    def destroy(self, request, *args, **kwargs):
+    @action(
+        detail=True,
+        methods=['post'],
+    )
+    def activate(self, request, pk=None):
         supplier = self.get_object()
 
-        supplier.is_active = False
-        supplier.save(update_fields=['is_active'])
+        if supplier.is_active:
+            raise ValidationError(
+                'El proveedor ya está activo.'
+            )
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        supplier.is_active = True
+
+        supplier.save(
+            update_fields=[
+                'is_active',
+                'updated_at',
+            ]
+        )
+
+        return Response(
+            SupplierSerializer(supplier).data,
+            status=status.HTTP_200_OK,
+        )
+
+    @action(
+        detail=True,
+        methods=['post'],
+    )
+    def deactivate(self, request, pk=None):
+        supplier = self.get_object()
+
+        if not supplier.is_active:
+            raise ValidationError(
+                'El proveedor ya está inactivo.'
+            )
+
+        supplier.is_active = False
+
+        supplier.save(
+            update_fields=[
+                'is_active',
+                'updated_at',
+            ]
+        )
+
+        return Response(
+            SupplierSerializer(supplier).data,
+            status=status.HTTP_200_OK,
+        )

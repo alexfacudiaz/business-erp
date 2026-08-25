@@ -66,6 +66,10 @@ class Supplier(TimeStampedModel):
     )
 
     class Meta:
+        permissions = (
+            ('activate_supplier', 'Can activate supplier'),
+            ('deactivate_supplier', 'Can deactivate supplier'),
+        )
         constraints = [
             models.CheckConstraint(
                 condition=(
