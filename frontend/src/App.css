@@ -1,0 +1,168 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  background: #f5f6f8;
+}
+
+.sidebar {
+  width: 240px;
+  min-height: 100vh;
+  flex-shrink: 0;
+
+  background: #1f2937;
+  color: white;
+}
+
+.sidebar-brand {
+  padding: 24px;
+  border-bottom: 1px solid #374151;
+}
+
+.sidebar-brand h1 {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  gap: 4px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 12px 16px;
+  border-radius: 6px;
+
+  color: #d1d5db;
+  text-decoration: none;
+
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.sidebar-nav a:hover {
+  background: #374151;
+  color: white;
+}
+
+.sidebar-nav a.active {
+  background: #4b5563;
+  color: white;
+}
+
+.main-area {
+  flex: 1;
+  min-width: 0;
+}
+
+.header {
+  height: 64px;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.header-user {
+  color: #6b7280;
+}
+
+.content {
+  padding: 32px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.stat-card {
+  min-height: 130px;
+}
+
+.stat-card-title {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.stat-card-value {
+  margin: 8px 0;
+  color: #111827;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.stat-card-description {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.page-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.dashboard-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.dashboard-section h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #f3f4f6;
+}
+
+.summary-row span {
+  color: #6b7280;
+}
